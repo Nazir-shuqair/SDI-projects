@@ -1,7 +1,7 @@
 //Nazir Shuqair
-//June 5th, 2013
+//June 12th, 2013
 //SDI 0613
-// Project 1
+// Project 2
 
 var lCDRName = "James";
 var company1 = "Alpha";
