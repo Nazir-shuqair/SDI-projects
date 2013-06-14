@@ -4,18 +4,15 @@
 // Project 2
 
 var lCDRName = "James";
-var company1 = "Alpha";
-var company2 = "Bravo";
-var company3 = "Charlie";
+var company3 = "\"Charlie\"";
 var isTankDestroyer = false;
 var tankCount = 4;
 var minimumRequirement = 3;
-var squadCount = 12;
 var battleReady = true;
-var attackLocation = ["High ground", "Across River", "Enemy Flank", "Head on"];
+var attackLocation = ["Enemy Flank", "High ground", "Across River", "Head on	"];
 var speed = 25;
 
-//This is done
+//Procedure function
 var specialty = function (isDestroyer){
 
 	console.log("LCDR " + lCDRName + ":  Are the hostile Tanks designated \"Tank Destroyer\"? " );
@@ -29,16 +26,22 @@ var specialty = function (isDestroyer){
 	
 }
 
-//Needs work
+//Boolean Function
 var readiness = function (isReady, minimum){
 
 	var ready;
+	var isAirStrikAvl = true;
 	
-	if(minimum > 3 && isReady)
+	if((minimum > 3 && isReady) || isAirStrikAvl) {
 		
-		ready = true;
-	else 
-		ready = false;
+		ready = "We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
+		".  Or an Air Strike capability is set to: " + isAirStrikAvl;
+	}	
+	else{
+		ready = "We are either short on tanks, or based on a true or false, our battle readiness is at" + isReady;
+		
+	}
+	
 		
 return ready;		
 
@@ -49,14 +52,15 @@ return ready;
 //Number function
 var calRateOfSuccess = function (tanks){
 
-	var hostileEstimate = [2, 3, 4, 5, 6];
+	var hostileEstimate = [2];
 	var c = 0;
 	
-	while (c < hostileEstimate.length){
+	while (c < 5){
 		
-		var percent = (tanks / hostileEstimate[c]) * 100;
+		var percent = Math.round((tanks / hostileEstimate[c]) * 100);
 		if(percent > 100){
-			console.log("We outnumber the enemy tanks if they only have " + hostileEstimate[c]);
+			var extra = tanks - hostileEstimate[c];
+			console.log("We outnumber the enemy tanks by " + extra + " if they only have " + hostileEstimate[c]);
 		} else if (tanks == hostileEstimate[c]){
 			console.log("The hostiles match our numbers if they have " + hostileEstimate[c] + " tanks on the battlefield");
 		}else {
@@ -64,6 +68,8 @@ var calRateOfSuccess = function (tanks){
 			console.log("If " + hostileEstimate[c] + " hostile tanks are present, the success rate is at " + percent + " %");
 		}
 		
+		//Array method
+		hostileEstimate.push( hostileEstimate[c] + 1 );
 		c++;
 	}
 	
@@ -84,20 +90,25 @@ var backup = function (cDR, unit) {
 
 var eTA = function (location, speedRate){
 
-	var distance = [100, 80, 120, 40];
+	var distance = [120, 100, 80, 40];
+	var closeRange = 85;
+	var timeArray = [0];
 	
-	
+	console.log("Command:  Below are the locations to consider, along with their distance.");
+	console.log("Location:		Distance:");
+
 	for(var c = 0; c < location.length; c++){
 		var time = distance[c] / speedRate;
-		console.log("The distance to " + location[c] + " is " + distance[c] + " miles and will take " + time + "hr to reach the destination at a speed of 25mph");  
-			// for(var e = 20; e < distance[c]; e+= 20){
-// 				var remaining = distance[c] - e;
-// 				console.log("We have covered " + e + " miles and have " + remaining + " miles to reach destination");
-// 			}
-		console.log(" ");
+		timeArray[c] = " " + time + "hrs";
+			
+		console.log(location[c] + "		" +  distance[c] + " Miles		");  
+		
+		
 	}
+	
 
-return distance;
+console.log(" ");
+return timeArray;
 };
 
 console.log("Commander " + lCDRName + " enters the room and mission discussion is underway.  Mission transcript is as follows: ");
@@ -107,23 +118,26 @@ specialty(isTankDestroyer);
 console.log(" ");
 
 console.log("LCDR " + lCDRName + ":  Where do we stand on troops and armor readiness?");
-if (readiness(battleReady, tankCount)){
-	console.log("We are battle ready and exceed the minimum requirement of " + minimumRequirement + " Tanks");
-}
-else
-	console.log("We are either short on tanks, or based on a true or false, our battle readiness is at" + readiness(battleReady, tankCount));
+var battleR = readiness(battleReady, tankCount);
+console.log(battleR);
 console.log(" ");
 	
-console.log("LCDR " + lCDRName + ":  Whats the input from the recon team and how do we stack up");
+
+	
+console.log("LCDR " + lCDRName + ":  What's the input from the recon team and how do we stack up");
 console.log("Hostiles are estimated to have anywhere from 2 to 6 tanks. The list below describes our rate of success: " );
 console.log(" ");
-console.log(calRateOfSuccess(tankCount) + " % is the worst case senario");
+var rate = calRateOfSuccess(tankCount);
+console.log(rate + " % is the worst case senario");
 
 
 var backupPlan = backup(lCDRName, company3);
 console.log("In which case, " + backupPlan);
 console.log(" ");
 
-console.log("Command:  below are the locations to consider, along with their distance and the time it would take our tanks to reach them."); 
-console.log(eTA(attackLocation, speed) + " Using the information provided.  Head on is the closest location to start the attack, while the flank is more than 3 hours farther."  );
+
+var estimatedArival = eTA(attackLocation, speed);
+console.log(estimatedArival + " | The times to the left reflect the ETA(estimated time of arrival) to the list of destinations above, accordingly.");
+console.log(" ");
+
 
