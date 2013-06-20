@@ -2,6 +2,8 @@
 //June 12th, 2013
 //SDI 0613
 // Project 2
+//GitHub repository link:
+//https://github.com/g67277/SDI-projects.git
 
 var lCDRName = "James";
 var company3 = "\"Charlie\"";
