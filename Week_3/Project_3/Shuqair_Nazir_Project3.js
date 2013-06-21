@@ -1,7 +1,7 @@
 //Nazir Shuqair
-//June 12th, 2013
+//June 20th, 2013
 //SDI 0613
-// Project 2
+// Project 3
 //GitHub repository link:
 //https://github.com/g67277/SDI-projects.git
 
@@ -13,6 +13,34 @@ var minimumRequirement = 3;
 var battleReady = true;
 var attackLocation = ["Enemy Flank", "High ground", "Across River", "Head on	"];
 var speed = 25;
+
+var tank = {
+	
+	"name" : "M1",
+	"speed" : [10,15,20,25,30,35],
+	"gasCapacity" : 498,
+	"mpg" : .60,
+	"isReady" : true,
+	"ammunition" : {
+	
+		"type1" : "100mm",
+		"type2" : "105mm",
+		"type3" : "120mm"
+	
+	},	
+	
+	"getRange": function(){//getter
+	
+		var range = this.gasCapacity * this.mpg;
+		return range;
+	}, //end getter
+	
+	"setMPG": function(newMPG){//setter
+	
+		this.mpg = newMPG;
+	}//end setter
+	
+}// end of tank object
 
 //Procedure function
 var specialty = function (isDestroyer){
@@ -35,12 +63,15 @@ var readiness = function (isReady, minimum){
 	var isAirStrikAvl = true;
 	
 	if((minimum > 3 && isReady) || isAirStrikAvl) {
+	
+		console.log("We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
+		".  Or an Air Strike capability is set to: " + isAirStrikAvl);
 		
-		ready = "We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
-		".  Or an Air Strike capability is set to: " + isAirStrikAvl;
+		ready = true;
 	}	
 	else{
-		ready = "We are either short on tanks, or based on a true or false, our battle readiness is at" + isReady;
+		console.log("We are either short on tanks, or based on a true or false, our battle readiness is at" + isReady);
+		ready = false;
 		
 	}
 	
@@ -120,8 +151,9 @@ specialty(isTankDestroyer);
 console.log(" ");
 
 console.log("LCDR " + lCDRName + ":  Where do we stand on troops and armor readiness?");
-var battleR = readiness(battleReady, tankCount);
+var battleR = "Readiness is at: " + readiness(battleReady, tankCount);
 console.log(battleR);
+console.log(tank.name + " readiness is at: " + tank.isReady);
 console.log(" ");
 	
 
@@ -137,9 +169,13 @@ var backupPlan = backup(lCDRName, company3);
 console.log("In which case, " + backupPlan);
 console.log(" ");
 
+console.log("Command: Our " + tank.name + " tanks have a range of " + tank.getRange() + " miles");
+
 
 var estimatedArival = eTA(attackLocation, speed);
 console.log(estimatedArival + " | The times to the left reflect the ETA(estimated time of arrival) to the list of destinations above, accordingly.");
 console.log(" ");
+
+
 
 
