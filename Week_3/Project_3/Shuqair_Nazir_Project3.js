@@ -12,7 +12,24 @@ var tankCount = 4;
 var minimumRequirement = 3;
 var battleReady = true;
 var attackLocation = ["Enemy Flank", "High ground", "Across River", "Head on	"];
-var speed = 25;
+
+var json = {
+	
+	"hostiles" : [
+	
+		{"unitNum" : 6, "tankNum" : 2},
+		{"unitNum" : 9, "tankNum" : 3},
+		{"unitNum" : 12, "tankNum" : 4},
+		{"unitNum" : 15, "tankNum" : 5},
+		{"unitNum" : 18, "tankNum" : 6}
+
+		
+	]
+
+}// end of json
+
+	
+
 
 var tank = {
 	
@@ -62,15 +79,18 @@ var readiness = function (isReady, minimum){
 	var ready;
 	var isAirStrikAvl = true;
 	
-	if((minimum > 3 && isReady) || isAirStrikAvl) {
+	if((isReady) || isAirStrikAvl) {
 	
-		console.log("We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
-		".  Or an Air Strike capability is set to: " + isAirStrikAvl);
+		if(minimum > 3){
+	
+			console.log("We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
+			".  Or an Air Strike capability is set to: " + isAirStrikAvl);
 		
-		ready = true;
+			ready = true;
+		}
 	}	
 	else{
-		console.log("We are either short on tanks, or based on a true or false, our battle readiness is at" + isReady);
+		console.log("We are either short on tanks, or based on a true or false, our battle readiness is at " + isReady);
 		ready = false;
 		
 	}
@@ -144,6 +164,11 @@ console.log(" ");
 return timeArray;
 };
 
+
+
+
+		
+
 console.log("Commander " + lCDRName + " enters the room and mission discussion is underway.  Mission transcript is as follows: ");
 console.log(" ");
 
@@ -161,6 +186,10 @@ console.log(" ");
 console.log("LCDR " + lCDRName + ":  What's the input from the recon team and how do we stack up");
 console.log("Hostiles are estimated to have anywhere from 2 to 6 tanks. The list below describes our rate of success: " );
 console.log(" ");
+for(var key in json.hostiles){
+	console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
+}
+console.log(" ");	
 var rate = calRateOfSuccess(tankCount);
 console.log(rate + " % is the worst case senario");
 
@@ -170,9 +199,11 @@ console.log("In which case, " + backupPlan);
 console.log(" ");
 
 console.log("Command: Our " + tank.name + " tanks have a range of " + tank.getRange() + " miles");
+tank.setMPG(1);
+console.log("Command: If we install the latest upgrade, our tank MPG will increase to " + tank.mpg + "mpg and our range will increase to " + tank.getRange() + " miles");
 
 
-var estimatedArival = eTA(attackLocation, speed);
+var estimatedArival = eTA(attackLocation, tank.speed[3]);
 console.log(estimatedArival + " | The times to the left reflect the ETA(estimated time of arrival) to the list of destinations above, accordingly.");
 console.log(" ");
 
