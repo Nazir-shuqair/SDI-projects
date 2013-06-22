@@ -8,6 +8,9 @@
 var lCDRName = "James";
 var company3 = "\"Charlie\"";
 var isTankDestroyer = false;
+var isTrained = true;
+var type = "Tank Crew"
+var yearsOfEX = 5;
 var tankCount = 4;
 var minimumRequirement = 3;
 var battleReady = true;
@@ -22,13 +25,9 @@ var json = {
 		{"unitNum" : 12, "tankNum" : 4},
 		{"unitNum" : 15, "tankNum" : 5},
 		{"unitNum" : 18, "tankNum" : 6}
-
-		
 	]
 
 }// end of json
-
-	
 
 
 var tank = {
@@ -100,8 +99,6 @@ return ready;
 
 }
 
-
-
 //Number function
 var calRateOfSuccess = function (tanks){
 
@@ -129,7 +126,6 @@ var calRateOfSuccess = function (tanks){
 	return percent;
 
 }
-
 
 var backup = function (cDR, unit) {
 
@@ -164,10 +160,21 @@ console.log(" ");
 return timeArray;
 };
 
+//object return function
+var soldier = function(trained, type, years){
+
+	var obj = {
+	
+		"trained" : trained,
+		"type" : type,
+		"years" : years,
+		"successRate" : "90%"
+	}
+	return obj;
+}
 
 
-
-		
+	
 
 console.log("Commander " + lCDRName + " enters the room and mission discussion is underway.  Mission transcript is as follows: ");
 console.log(" ");
@@ -194,10 +201,19 @@ var rate = calRateOfSuccess(tankCount);
 console.log(rate + " % is the worst case senario");
 
 
+
 var backupPlan = backup(lCDRName, company3);
 console.log("In which case, " + backupPlan);
 console.log(" ");
 
+console.log("Command" + lCDRName + " what are our soldiers criteria?");
+console.log("Command: Please open the list for complete details: ");
+var soldierObj = {
+
+ 	"soldier" : soldier(isTrained, type, yearsOfEX)
+ 
+}
+console.log(soldierObj.soldier);
 console.log("Command: Our " + tank.name + " tanks have a range of " + tank.getRange() + " miles");
 tank.setMPG(1);
 console.log("Command: If we install the latest upgrade, our tank MPG will increase to " + tank.mpg + "mpg and our range will increase to " + tank.getRange() + " miles");
