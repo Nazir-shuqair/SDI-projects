@@ -153,6 +153,7 @@ var eTA = function (location, speedRate){
 		var time = (distance[c] / speedRate);
 		var time2 = (distance[c] / speedRate) * 60;
 		timeArray[c] = " " + time + "hrs";
+		console.log(" ");
 		console.log(location[c] + "		" +  distance[c] + " Miles		");
 		for(var i = 30; i < time2; i += 30){
 			var timelapse = i;
