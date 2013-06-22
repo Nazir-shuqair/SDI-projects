@@ -16,6 +16,7 @@ var minimumRequirement = 3;
 var battleReady = true;
 var attackLocation = ["Enemy Flank", "High ground", "Across River", "Head on	"];
 
+//JSON
 var json = {
 	
 	"hostiles" : [
@@ -29,7 +30,7 @@ var json = {
 
 }// end of json
 
-
+//Object
 var tank = {
 	
 	"name" : "M1",
@@ -127,6 +128,7 @@ var calRateOfSuccess = function (tanks){
 
 }
 
+//String function
 var backup = function (cDR, unit) {
 
 	var additionalT = 6;
@@ -137,21 +139,25 @@ var backup = function (cDR, unit) {
 
 };
 
+//Array function
 var eTA = function (location, speedRate){
 
 	var distance = [120, 100, 80, 40];
 	var closeRange = 85;
 	var timeArray = [0];
 	
-	console.log("Command:  Below are the locations to consider, along with their distance.");
+	console.log("Command:  Below are the locations to consider, along with their distance and the ETA updates we will receive:");
 	console.log("Location:		Distance:");
 
 	for(var c = 0; c < location.length; c++){
-		var time = distance[c] / speedRate;
+		var time = (distance[c] / speedRate);
+		var time2 = (distance[c] / speedRate) * 60;
 		timeArray[c] = " " + time + "hrs";
-			
-		console.log(location[c] + "		" +  distance[c] + " Miles		");  
-		
+		console.log(location[c] + "		" +  distance[c] + " Miles		");
+		for(var i = 30; i < time2; i += 30){
+			var timelapse = i;
+			console.log("ETA: " + timelapse + "mins");
+		}
 		
 	}
 	
@@ -173,7 +179,12 @@ var soldier = function(trained, type, years){
 	return obj;
 }
 
-
+//object argument function
+var important = function(object){
+	for(var key in object.hostiles){
+		console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
+	}
+}
 	
 
 console.log("Commander " + lCDRName + " enters the room and mission discussion is underway.  Mission transcript is as follows: ");
@@ -193,9 +204,10 @@ console.log(" ");
 console.log("LCDR " + lCDRName + ":  What's the input from the recon team and how do we stack up");
 console.log("Hostiles are estimated to have anywhere from 2 to 6 tanks. The list below describes our rate of success: " );
 console.log(" ");
-for(var key in json.hostiles){
-	console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
-}
+//for(var key in json.hostiles){
+//	console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
+//}
+console.log(important(json));
 console.log(" ");	
 var rate = calRateOfSuccess(tankCount);
 console.log(rate + " % is the worst case senario");
@@ -214,6 +226,8 @@ var soldierObj = {
  
 }
 console.log(soldierObj.soldier);
+console.log(" ");
+
 console.log("Command: Our " + tank.name + " tanks have a range of " + tank.getRange() + " miles");
 tank.setMPG(1);
 console.log("Command: If we install the latest upgrade, our tank MPG will increase to " + tank.mpg + "mpg and our range will increase to " + tank.getRange() + " miles");
