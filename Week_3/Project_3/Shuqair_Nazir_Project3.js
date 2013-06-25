@@ -31,6 +31,8 @@ var json = {
 }// end of json
 
 //Object
+//Makeup:  Included the procedure methode and a function methode.
+//Also encapsulated more functions
 var tank = {
 	
 	"name" : "M1",
