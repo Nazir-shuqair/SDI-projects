@@ -44,23 +44,10 @@ var tank = {
 		"type2" : "105mm",
 		"type3" : "120mm"
 	
-	},	
+	},
 	
-	"getRange": function(){//getter
-	
-		var range = this.gasCapacity * this.mpg;
-		return range;
-	}, //end getter
-	
-	"setMPG": function(newMPG){//setter
-	
-		this.mpg = newMPG;
-	}//end setter
-	
-}// end of tank object
-
-//Procedure function
-var specialty = function (isDestroyer){
+	//Procedure Methode
+	"specialty" : function (isDestroyer){
 
 	console.log("LCDR " + lCDRName + ":  Are the hostile Tanks designated \"Tank Destroyer\"? " );
 	
@@ -71,34 +58,72 @@ var specialty = function (isDestroyer){
 		console.log("No, mission parameters are as expected.  We can proceed.");  
 	};
 	
-}
+	},	
+	
+	//Boolean Methode
+	"readiness" : function (isReady, minimum){
 
-//Boolean Function
-var readiness = function (isReady, minimum){
-
-	var ready;
-	var isAirStrikAvl = true;
+		var ready;
+		var isAirStrikAvl = true;
 	
-	if((isReady) || isAirStrikAvl) {
+		if((isReady) || isAirStrikAvl) {
 	
-		if(minimum > 3){
+			if(minimum > 3){
 	
-			console.log("We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
-			".  Or an Air Strike capability is set to: " + isAirStrikAvl);
+				console.log("We exceed the minimum requirement for an assault, with " + minimum + " Tanks, and based on a true or false, our battle readiness is at: " + isReady + 
+				".  Or an Air Strike capability is set to: " + isAirStrikAvl);
 		
-			ready = true;
+				ready = true;
+			}
+		}	
+		else{
+			console.log("We are either short on tanks, or based on a true or false, our battle readiness is at " + isReady);
+			ready = false;
+		
 		}
-	}	
-	else{
-		console.log("We are either short on tanks, or based on a true or false, our battle readiness is at " + isReady);
-		ready = false;
-		
-	}
 	
 		
-return ready;		
+	return ready;		
 
-}
+	},
+	
+	"getRange": function(){//getter
+	
+		var range = this.gasCapacity * this.mpg;
+		return range;
+	}, //end getter
+	
+	"setMPG": function(newMPG){//setter
+	
+		this.mpg = newMPG;
+	},//end setter
+	
+	//object return function
+	"soldier" : function(trained, type, years){
+
+		var obj = {
+	
+			"trained" : trained,
+			"type" : type,
+			"years" : years,
+			"successRate" : "90%"
+		}
+		return obj;
+	},
+	
+	//object argument function
+	"important" : function(object){
+		for(var key in object.hostiles){
+			console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
+		}
+	}
+
+		
+}// end of tank object
+
+
+
+
 
 //Number function
 var calRateOfSuccess = function (tanks){
@@ -165,37 +190,16 @@ var eTA = function (location, speedRate){
 
 console.log(" ");
 return timeArray;
-};
-
-//object return function
-var soldier = function(trained, type, years){
-
-	var obj = {
-	
-		"trained" : trained,
-		"type" : type,
-		"years" : years,
-		"successRate" : "90%"
-	}
-	return obj;
-}
-
-//object argument function
-var important = function(object){
-	for(var key in object.hostiles){
-		console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
-	}
-}
-	
+};	
 
 console.log("Commander " + lCDRName + " enters the room and mission discussion is underway.  Mission transcript is as follows: ");
 console.log(" ");
 
-specialty(isTankDestroyer);
+tank.specialty(isTankDestroyer);
 console.log(" ");
 
 console.log("LCDR " + lCDRName + ":  Where do we stand on troops and armor readiness?");
-var battleR = "Readiness is at: " + readiness(battleReady, tankCount);
+var battleR = "Readiness is at: " + tank.readiness(battleReady, tankCount);
 console.log(battleR);
 console.log(tank.name + " readiness is at: " + tank.isReady);
 console.log(" ");
@@ -208,7 +212,7 @@ console.log(" ");
 //for(var key in json.hostiles){
 //	console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
 //}
-console.log(important(json));
+console.log(tank.important(json));
 console.log(" ");	
 var rate = calRateOfSuccess(tankCount);
 console.log(rate + " % is the worst case senario");
@@ -223,7 +227,7 @@ console.log("Command" + lCDRName + " what are our soldiers criteria?");
 console.log("Command: Please open the list for complete details: ");
 var soldierObj = {
 
- 	"soldier" : soldier(isTrained, type, yearsOfEX)
+ 	"soldier" : tank.soldier(isTrained, type, yearsOfEX)
  
 }
 console.log(soldierObj.soldier);
