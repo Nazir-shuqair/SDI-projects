@@ -98,7 +98,7 @@ var tank = {
 		this.mpg = newMPG;
 	},//end setter
 	
-	//object return function
+	//object return Methode
 	"soldier" : function(trained, type, years){
 
 		var obj = {
@@ -111,18 +111,14 @@ var tank = {
 		return obj;
 	},
 	
-	//object argument function
+	//object argument Methode
 	"important" : function(object){
 		for(var key in object.hostiles){
 			console.log("If the enemy has " + json.hostiles[key].unitNum + " unites, then they have " + json.hostiles[key].tankNum + " Tanks.");
 		}
 	}
-
 		
 }// end of tank object
-
-
-
 
 
 //Number function
