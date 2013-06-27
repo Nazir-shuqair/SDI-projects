@@ -181,9 +181,36 @@ var myNumberLib = function(){
 
 } // Number lib end
 
+//Array Functions Library
+var myArrayLib = function(){
+
+	//Next bigger number function
+	var oneUp = function(arr, key){
+	
+		var arr = arr.sort();
+		console.log(arr);
+		
+		for(var i = 0; i < arr.length; i++){
+			
+			if(arr[i] > key){
+				return arr[i];
+			}
+		}
+	}//Next bigger number end
+	
+	//Library returns
+	return{
+	
+		"oneUp" : oneUp
+	
+	}
+
+}
+
 
 var stringLib = new myStringLib();
 var numberLib = new myNumberLib();
+var arrayLib = new myArrayLib();
 
 //Phone number test
 var num1 = "123-445-7890";
@@ -238,6 +265,13 @@ var number = "12367456";
 console.log(numberLib.stringConv(number));
 // end test
 
+
+//Next bigger number test
+var numArray = [45, 86, 1, 45, 23, 54, 38, 24, 2];
+var key = 3;
+
+console.log(arrayLib.oneUp(numArray, key));
+// end test
 
 
 
