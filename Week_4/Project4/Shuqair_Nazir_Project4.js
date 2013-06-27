@@ -110,10 +110,35 @@ var myNumberLib = function(){
 		return num;
 	}// decimal points end
 	
+	//Fuzzy Match function (need to check if the return is correct)
+	var fuzzyMatch = function(num1, num2, num3){
+	
+		var check1;
+		var check2;
+		if(num1 < num2){
+			check1 = (num1 / num2) * 100;
+			if(check1 >= num3){
+				var result = true;
+			}else{
+				var result = false;
+			}
+		}else{
+			check2 = (num2 / num1) * 100;
+			if(check2 >= num3){
+				var result = true;
+			}else{
+				var result = false;
+			}
+		}
+		
+		return result;
+	}// Fuzzy match end
+	
 	//Library returns
 	return {
 	
-		"decimalPoints" : decimalPoints
+		"decimalPoints" : decimalPoints,
+		"fuzzyMatch" : fuzzyMatch
 	
 	}// end returns
 
@@ -155,5 +180,10 @@ var replacmentSep = "/";
 var testCost = 146.3334458;
 var points = 1;
 console.log(numberLib.decimalPoints(testCost, points));
+// end test
+
+//Fuzzy Match test
+var a = 4, b = 10, c = 50;
+console.log(numberLib.fuzzyMatch(a,b,c));
 // end test
 
