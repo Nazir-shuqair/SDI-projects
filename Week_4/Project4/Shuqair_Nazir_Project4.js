@@ -134,11 +134,37 @@ var myNumberLib = function(){
 		return result;
 	}// Fuzzy match end
 	
+	//Hours or Days difference function
+	var timeDiff = function(date1, date2, choice){
+		
+		choice = choice.toLowerCase();
+		date1 = new Date(date1);
+		date2 = new Date(date2);
+		var hour = 60 * 60 * 1000;
+		var day = hour * 24;
+		var difference = Math.floor(date1.getTime() - date2.getTime());
+		
+		if(difference < 0){
+			difference = difference * -1;
+		}
+		
+		if(choice == "days"){
+			
+			var result = difference / day;
+		}else{
+			
+			var result = difference / hour;
+		}
+	
+		return result;
+	}//hours or days difference end
+	
 	//Library returns
 	return {
 	
 		"decimalPoints" : decimalPoints,
-		"fuzzyMatch" : fuzzyMatch
+		"fuzzyMatch" : fuzzyMatch,
+		"timeDiff" : timeDiff
 	
 	}// end returns
 
@@ -186,4 +212,18 @@ console.log(numberLib.decimalPoints(testCost, points));
 var a = 4, b = 10, c = 50;
 console.log(numberLib.fuzzyMatch(a,b,c));
 // end test
+
+//Hours or Days difference test
+var dateOne = "3 June 2013";
+var dateTwo = "5 June 2014";
+var DOrH = "days"
+console.log(numberLib.timeDiff(dateOne,dateTwo,DOrH));
+// end test
+
+
+
+
+
+
+
 
