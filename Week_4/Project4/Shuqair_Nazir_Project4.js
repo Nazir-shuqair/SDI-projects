@@ -28,7 +28,6 @@ var myStringLib = function(){
 		return result;
 	}// end phone number check
 	
-	
 	//Email Address Check
 	var emailCheck = function(entry){
 	
@@ -63,14 +62,32 @@ var myStringLib = function(){
 		}
 	
 		return result;
-	}
+	}// end URL check
+	
+	//Title-Case function
+	var tCase = function(entry){
+		
+		var lower = entry.toLowerCase();
+		var words = lower.split(" ");
+		var wordArray = Array();
+		for(var c = 0; c < words.length; c++){
+		
+			t = words[c];
+			t = t.charAt(0).toUpperCase() + t.substring(1);
+			wordArray.push(t);
+		}
+		
+		return wordArray.join(" ");
+
+	}// end Title-Case 
 	
 	//Library returns
 	return{
 	
 		"phoneNum" : phoneNum,
 		"emailCheck" : emailCheck,
-		"uRL" : uRL
+		"uRL" : uRL,
+		"tCase" : tCase
 	
 	}//end library returns
 	
@@ -93,4 +110,12 @@ console.log(stringLib.emailCheck(address));
 var urlAdd = "google.https://com";
 console.log(stringLib.uRL(urlAdd));
 //end test
+
+//title-case test
+var sentance = "is this working?";
+console.log(stringLib.tCase(sentance));
+//end test
+
+
+
 
