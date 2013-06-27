@@ -26,7 +26,8 @@ var myStringLib = function(){
 			var result = false;
 		}
 		return result;
-	}
+	}// end phone number check
+	
 	
 	//Email Address Check
 	var emailCheck = function(entry){
@@ -45,14 +46,33 @@ var myStringLib = function(){
 	
 	return result;
 	
+	}// end email address check
+	
+	//URL Check
+	var uRL = function(entry){
+	
+		var check = entry.substring(0, entry.indexOf("p") + 1);
+		var c1 = "http://";
+		var c2 = "https://";
+		
+		if((entry.indexOf(c1) > -1 || entry.indexOf(c2) > -1) && check == "http"){
+		
+			var result = true;
+		}else{
+			var result = false;
+		}
+	
+		return result;
 	}
 	
+	//Library returns
 	return{
 	
 		"phoneNum" : phoneNum,
-		"emailCheck" : emailCheck
+		"emailCheck" : emailCheck,
+		"uRL" : uRL
 	
-	}
+	}//end library returns
 	
 }
 
@@ -69,4 +89,8 @@ var address = "one@two.com";
 console.log(stringLib.emailCheck(address));
 // end test
 
+//URL test
+var urlAdd = "google.https://com";
+console.log(stringLib.uRL(urlAdd));
+//end test
 
