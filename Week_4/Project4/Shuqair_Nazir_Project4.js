@@ -159,12 +159,23 @@ var myNumberLib = function(){
 		return result;
 	}//hours or days difference end
 	
+	//String conversion function
+	var stringConv = function (entry){
+	
+		entry = parseInt(entry);
+		
+		return entry;
+	
+	}//String conversion end
+	
+		
 	//Library returns
 	return {
 	
 		"decimalPoints" : decimalPoints,
 		"fuzzyMatch" : fuzzyMatch,
-		"timeDiff" : timeDiff
+		"timeDiff" : timeDiff,
+		"stringConv" : stringConv
 	
 	}// end returns
 
@@ -220,6 +231,12 @@ var DOrH = "days"
 console.log(numberLib.timeDiff(dateOne,dateTwo,DOrH));
 // end test
 
+
+//String conversion test
+var number = "12367456";
+
+console.log(numberLib.stringConv(number));
+// end test
 
 
 
