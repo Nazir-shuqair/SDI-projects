@@ -198,10 +198,27 @@ var myArrayLib = function(){
 		}
 	}//Next bigger number end
 	
+	//value of array numbers (can't figure out how to exclude the number string, need more research)
+	var arrayValue = function(entry){
+	
+		var total = 0;
+		for(var key in entry){
+		
+			if(isNaN(entry[key])){
+			}else{
+			total += entry[key];
+			}
+		
+		}
+		
+	return total;
+	}//value of array end
+	
 	//Library returns
 	return{
 	
-		"oneUp" : oneUp
+		"oneUp" : oneUp,
+		"arrayValue" : arrayValue
 	
 	}
 
@@ -274,6 +291,13 @@ console.log(arrayLib.oneUp(numArray, key));
 // end test
 
 
+//value of array numbers test
+var arrayTest = [2, "test", 4, "76", 10, 1, "nazir"];
+var arrayTest2 = [2,3,5,10];
+
+console.log(arrayLib.arrayValue(arrayTest));
+
+// ? need more research
 
 
 
