@@ -81,6 +81,12 @@ var myStringLib = function(){
 
 	}// end Title-Case 
 	
+	//Separator Replacement (needs more research)
+	var separatorReplacement = function(entry, current, replacement){
+	
+
+	}// end Separator Replacement
+	
 	//Library returns
 	return{
 	
@@ -91,10 +97,31 @@ var myStringLib = function(){
 	
 	}//end library returns
 	
-}
+}// String lib end
+
+//Number Functions Library 
+var myNumberLib = function(){
+
+	//Decimal Points function
+	var decimalPoints = function(num, dPoints){
+	
+		num = num.toFixed(dPoints);
+		
+		return num;
+	}// decimal points end
+	
+	//Library returns
+	return {
+	
+		"decimalPoints" : decimalPoints
+	
+	}// end returns
+
+} // Number lib end
 
 
 var stringLib = new myStringLib();
+var numberLib = new myNumberLib();
 
 //Phone number test
 var num1 = "123-445-7890";
@@ -116,6 +143,17 @@ var sentance = "is this working?";
 console.log(stringLib.tCase(sentance));
 //end test
 
+//Separator Replacement test
+var sepStr = "one, two, three, four";
+var currentSep = ",";
+var replacmentSep = "/";
+
+// end test
 
 
+//Decimal Points test
+var testCost = 146.3334458;
+var points = 1;
+console.log(numberLib.decimalPoints(testCost, points));
+// end test
 
