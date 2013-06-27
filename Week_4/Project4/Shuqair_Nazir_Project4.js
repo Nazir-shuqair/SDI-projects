@@ -5,10 +5,10 @@
 //GitHub repository link:
 //https://github.com/g67277/SDI-projects.git
 
-//String Functions Library
+//String Functions Library 
 var myStringLib = function(){
 
-	//Phone number check
+	//Phone number check (still needs work)
 	var phoneNum = function(entry){
 	
 		var check1 = parseInt(entry.substring(0, entry.indexOf("-")));
@@ -28,15 +28,45 @@ var myStringLib = function(){
 		return result;
 	}
 	
+	//Email Address Check
+	var emailCheck = function(entry){
+	
+		var com = entry.substring(entry.indexOf(".") + 1, entry.length);
+		var c1 = "@";
+		var c2 = ".";
+	
+		if((entry.indexOf(c1) > -1 && entry.indexOf(c2) > -1) && com == "com"){
+			
+			var result = true;
+		}else{
+		
+			var result = false;
+		}
+	
+	return result;
+	
+	}
+	
 	return{
 	
-		"phoneNum" : phoneNum
+		"phoneNum" : phoneNum,
+		"emailCheck" : emailCheck
 	
 	}
 	
 }
 
+
 var stringLib = new myStringLib();
 
+//Phone number test
 var num1 = "123-445-7890";
 console.log(stringLib.phoneNum(num1));
+// end test
+
+//email address test
+var address = "one@two.com";
+console.log(stringLib.emailCheck(address));
+// end test
+
+
