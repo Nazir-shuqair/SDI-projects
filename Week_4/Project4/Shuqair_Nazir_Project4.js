@@ -20,6 +20,8 @@ var myStringLib = function(){
 			if((!isNaN(check1) && !isNaN(check2)) && !isNaN(check3)){
 			
 				var result = true;
+			}else{
+				var result = false;
 			}
 		}else{
 			
@@ -188,7 +190,6 @@ var myArrayLib = function(){
 	var oneUp = function(arr, key){
 	
 		var arr = arr.sort();
-		console.log(arr);
 		
 		for(var i = 0; i < arr.length; i++){
 			
@@ -196,6 +197,8 @@ var myArrayLib = function(){
 				return arr[i];
 			}
 		}
+		
+	return;
 	}//Next bigger number end
 	
 	//value of array numbers (can't figure out how to exclude the number string, need more research)
